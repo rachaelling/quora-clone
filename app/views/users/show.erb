@@ -1,0 +1,107 @@
+<% if @error %>
+<div class="alert-danger">
+  <%= @error %>
+</div>
+<% end %>
+
+
+<!-- View for Profile page -->
+<form method="post" action="/logout">
+    <input type=hidden name="_method" value="logout"><br>
+    <input type=submit value="Logout">
+</form>
+<form method="post" action="/users/<%=@user.id%>">
+    <input type=hidden name="_method" value="delete">
+    <input type=submit value="Delete Account">
+</form>
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+            <div class="col-sm-12">
+                <div class="col-xs-12 col-sm-8">
+                    <h2><%=User.find(session[:user_id]).username%></h2>
+
+                </div>
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <figure>
+                        <img src="/img/avatar.png" alt="" class="img-circle img-responsive">
+                        <figcaption class="Rating">
+                            <p>Awesomeness
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                 <span class="fa fa-star-o"></span>
+                            </a>
+                            </p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="col-xs-12 divider text-center">
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <h2><strong> 20,7K </strong></h2>
+                    <p><small>Followers</small></p>
+                    <button class="btn btn-success btn-block">Follow</button>
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <h2><strong>103</strong></h2>
+                    <p><small>Answers</small></p>
+                    <button class="btn btn-info btn-block"> View Answers</button>
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <h2><strong>43</strong></h2>
+                    <p><small>Questions</small></p>
+										 <button class="btn btn-info btn-block"> See Questions</button>
+                      <ul class="dropdown-menu text-left" role="menu">
+                        <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
+                        <li><a href="#"><span class="fa fa-list pull-right"></span> Add or remove from a list  </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><span class="fa fa-warning pull-right"></span>Report this user for spam</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="btn disabled" role="button"> Unfollow </a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+    	 </div>
+		</div>
+	</div>
+</div>
+
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit Profile</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<form method="post" action="/users/<%=@user.id%>">
+						<input type=hidden name="_method" value="patch">
+
+				    Username:<input type=text name=user[username] value="<%=@user.username %>">
+				    Email:<input type=text name=user[email] value="<%=@user.email %>">
+				    <input type=submit value="Edit Profile">
+				</form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
